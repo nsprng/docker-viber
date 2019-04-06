@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 MAINTAINER nsprng
 
-#*Update system and install package dependencies*#
+#Update system and install package dependencies
 RUN apt update && apt upgrade -y && apt install -y \
       wget sudo libpulse0 libasound2 libnss3 libssl1.0.0 \
       libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 \
@@ -18,12 +18,12 @@ RUN apt update && apt upgrade -y && apt install -y \
       libpci3 mesa-utils libcggl libnvidia-gl-390 && \
     apt autoclean && apt autoremove
 
-#*Download and install viber package*#
+#Download and install viber package
 RUN wget https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb && \
     dpkg -i viber.deb && \
     rm -f viber.deb
 
-#*Create non-root user for running viber and make some necessary directories*#
+#Create non-root user for running viber and make some necessary directories
 RUN useradd -u 7777 -s /bin/bash -m viber && \
     mkdir -p /home/viber/.local/share/applications && \
     mkdir -p /home/viber/.config && \
@@ -33,5 +33,5 @@ RUN useradd -u 7777 -s /bin/bash -m viber && \
     chown -R 7777 /run/user/7777 && \
     chmod -R 700 /run/user/7777
 
-#*Run viber from non-root user*# 
+#Run viber from non-root user
 CMD sudo -u viber -i -- sh -c 'export XDG_RUNTIME_DIR=/run/user/7777 && /opt/viber/Viber'
