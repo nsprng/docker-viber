@@ -27,4 +27,4 @@ docker run -it --name viber -e DISPLAY=unix$DISPLAY \
   --privileged user/viber:latest
 ```
 
-> Note: host folder for downloads (/home/user/viber/downloads in example) should be owned by user with UID=7777.
+> Note: host folder for downloads (/home/user/viber/downloads in example) should be owned by user with the same UID as user "viber" created in Dockerfile.
